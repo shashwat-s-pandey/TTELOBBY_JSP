@@ -1,0 +1,50 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sidebarfadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.sidebar-fadeIn {
+    opacity: 0; /* Ensure initial state */
+    animation: sidebarfadeIn 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: transform, opacity; /* Optimize animation */
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+#loginModal {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; /* Equivalent to 'inset-0' */
+    align-items: center; /* Equivalent to 'items-center' */
+    justify-content: center; /* Equivalent to 'justify-center' */
+    background: rgba(0, 0, 0, 0.5); /* Equivalent to 'bg-black bg-opacity-50' */
+    z-index: 1000; /* Equivalent to 'z-[1000]' */
+}
+
+.close {
+    background-color: red;
+}
