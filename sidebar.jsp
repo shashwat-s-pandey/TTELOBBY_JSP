@@ -1,69 +1,65 @@
-<style>
-    #sidebar {
-        transition: background-color 0.2s ease-in-out, color 0.1s ease-in-out;
-    }
+<link rel="stylesheet" href="homepage.css">
 
-    #quick, #nav {
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease-in-out, visibility 0.3s ease-in-out;
-    }
-
-    #btnicon {
-        transition: background-color 0.2s ease-in-out, transform 0.3s ease-in-out;
-    }
-
-    #btnicon:hover {
-        transform: scale(1.2);
-    }
-</style>
-
-<div id="sidebar" class="animate-fadeIn h-[82%] w-[13%] absolute text-white font-semibold top-[112px] z-[1000] left-0 flex flex-col p-4">
+<!-- Sidebar -->
+<div id="sidebar" class="position-absolute h-100 font-weight-semibold d-flex flex-column p-2 sidebar-fadeIn" style="z-index: 1030; left: 0; top: 0; display: none;">
     <!-- Sidebar Header -->
-    <h2 id="quick" class="text-xl font-bold border-b border-gray-600 pt-5 pl-4 pb-4">Quick Links</h2>
-    
+    <h2 id="quick" style="padding-left: 15px;" class="h4 font-weight-bold border-bottom border-secondary pt-1 pb-3">Quick Links</h2>
+
     <!-- Navigation Links -->
-    <nav id="nav" class="mt-4 flex flex-col space-y-4">
-        <a href="https://hrms.indianrail.gov.in/HRMS/login" class="hover:bg-gradient-to-r from-blue-700 to-transparent hover:text-white hover:scale-105 duration-300 transition-all px-4 py-2 rounded">HRMS</a>
-        <a href="https://aims.indianrailways.gov.in/ress/" class="hover:bg-gradient-to-r from-teal-600 to-transparent hover:text-white hover:scale-105 duration-300 px-4 py-2 rounded">RESS</a>
-        <a href="https://www.hht.indianrail.gov.in/" class="hover:bg-gradient-to-r from-red-400 to-transparent hover:text-white hover:scale-105 duration-300 px-4 py-2 rounded">Handheld Terminal</a>
-        <a href="https://www.indianrail.gov.in/" class="hover:bg-gradient-to-r from-blue-500 to-transparent hover:text-white hover:scale-105 duration-300 px-4 py-2 rounded">Indian Railways</a>
-        <a href="https://indianrailways.gov.in/" class="hover:bg-gradient-to-r from-orange-500 to-transparent hover:text-white hover:scale-105 duration-300 px-4 py-2 rounded">Ministry of Railways</a>
+    <nav id="nav" class="d-flex flex-column">
+        <a href="https://hrms.indianrail.gov.in/HRMS/login" class="hrms text-decoration-none py-2 px-3 rounded">HRMS</a>
+        <a href="https://aims.indianrailways.gov.in/ress/" class="ress text-decoration-none py-2 px-3 rounded">RESS</a>
+        <a href="https://www.hht.indianrail.gov.in/" class="hht text-decoration-none py-2 px-3 rounded">Handheld Terminal</a>
+        <a href="#" class="reis text-decoration-none py-2 px-3 rounded">REIS</a>
+        <a href="#" class="rbs text-decoration-none py-2 px-3 rounded">RBS</a>
+        <a href="#" class="icms text-decoration-none py-2 px-3 rounded">ICMS</a>
+        <a href="#" class="tms text-decoration-none py-2 px-3 rounded">TMS</a>
+        <a href="#" class="nget text-decoration-none py-2 px-3 rounded">NGET</a>
+        <a href="#" class="wecrs text-decoration-none py-2 px-3 rounded">WECRS</a>
+        <a href="#" class="fois text-decoration-none py-2 px-3 rounded">FOIS</a>
+        <a href="#" class="ndma text-decoration-none py-2 px-3 rounded">NDMA</a>
     </nav>
 </div>
 
-<div id="infoicon" onclick="bgChange()" class="fixed bottom-[50px] left-[50px] z-[1000] flex justify-center items-center animate-fadeIn">
-    <button id="btnicon" class="rounded-full p-[5px] bg-gradient-to-r from-yellow-500 to-yellow-200">
-        <img src="assets/info2.png" alt="" width="50" height="50">
+<!-- Toggle Button (bottom-left corner) -->
+<div id="infoicon" onclick="homeSidebar()" class="animated fadeIn" style="position: fixed; bottom: 20px; left: 20px; z-index: 1030;">
+    <button id="btnicon" class="rounded-circle p-2 bg-warning border-0">
+        <img src="assets/info2.png" alt="Info" width="50" height="50">
     </button>
 </div>
 
+<!-- Script -->
 <script>
-    function bgChange() {
-        let sidebar = document.getElementById("sidebar");
-        let quickLinks = document.getElementById("quick");
-        let navLinks = document.getElementById("nav");
-        let icon = document.getElementById("btnicon")
+    function homeSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const infoIcon = document.getElementById("infoicon");
+    const btnIcon = document.getElementById("btnicon");
 
-        let isVisible = quickLinks.style.opacity === "1"; // Check if visible
+    const isVisible = sidebar.classList.contains("active");
 
-        if (isVisible) {
-            // Hide the links
-            sidebar.classList.remove("bg-white/80");
-            quickLinks.style.opacity = "0";
-            quickLinks.style.visibility = "hidden";
-            navLinks.style.opacity = "0";
-            navLinks.style.visibility = "hidden";
-        } else {
-            // Show the links
-            sidebar.classList.remove("bg-white/10", "text-white");
-            sidebar.classList.add("bg-white/80", "text-black");
-            icon.classList.remove("bg-white")
-            icon.classList.add("bg-white/10")
-            quickLinks.style.opacity = "1";
-            quickLinks.style.visibility = "visible";
-            navLinks.style.opacity = "1";
-            navLinks.style.visibility = "visible";
-        }
+    if (isVisible) {
+        // Start fade-out animation
+        sidebar.classList.remove("fade-in");
+        sidebar.classList.add("fade-out");
+
+        // After animation ends, fully hide the sidebar
+        setTimeout(() => {
+            sidebar.classList.remove("active");
+            sidebar.style.display = "none";
+            sidebar.classList.remove("fade-out");
+        }, 200); // Match this with your CSS transition duration
+
+        infoIcon.classList.remove("shift-right");
+    } else {
+        sidebar.style.display = "block";
+        sidebar.classList.add("active");
+        sidebar.classList.remove("fade-out");
+        sidebar.classList.add("fade-in");
+        infoIcon.classList.add("shift-right");
     }
+
+    btnIcon.blur();
+
+}
+
 </script>

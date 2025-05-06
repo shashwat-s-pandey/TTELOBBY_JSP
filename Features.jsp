@@ -5,95 +5,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Features</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap 4.5.2 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
 
-<section class="bg-transparent py-10">
-    <div class="container mx-auto text-center">
-        <h1 class="text-white font-semibold font-['Big_Shoulders'] text-[35px]">BENEFITS TO TTEs</h1>
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 pt-8 gap-x-[5px] gap-y-8 items-center">
-            
-            <div class="rounded-[40px] bg-gradient-to-r from-blue-200/80 via-white/80 to-yellow-100/80 transform hover:-translate-y-2 ease-out duration-500 
-                        shadow-md flex flex-col justify-center items-center 
-                        h-[200px] md:h-[180px] w-[150px] md:w-[200px] text-sm md:text-lg">
-                <img src="assets/feature1.png" alt="1" class="mt-2" width="80" height="80">
-                <button class="text-center text-[10px] lg:text-lg h-full md:text-[14px] font-semibold px-4">
-                    Drawing out of TTE links.
-                </button>
+<section class="bg-transparent py-4">
+    <div class="container text-center">
+        <h1 data-key="benefits" class="text-white fw-semibold" style="font-family: 'Big Shoulders', sans-serif; font-size: 35px;">
+            BENEFITS TO TTEs
+        </h1>
+
+        <div class="row pt-4 g-3 justify-content-center">
+            <!-- Card 1 -->
+            <div class="col-lg-3 col-md-6 col-sm-12 card-feature mb-4">
+                <div class="rounded-lg custom-gradient-blue shadow-lg d-flex flex-column justify-content-center align-items-center p-3 text-center w-100" style="height: 180px;">
+                    <img src="assets/feature1.png" alt="Drawing Links" class="mb-2" width="80" height="80">
+                    <button data-key="draw_links" class="btn btn-link text-dark font-weight-bold text-decoration-none">
+                        Drawing out of TTE links.
+                    </button>
+                </div>
             </div>
 
-            <div class="rounded-[40px] bg-gradient-to-r from-yellow-100/80 via-white/80 to-yellow-100/80 transform hover:-translate-y-2 ease-out duration-500 
-                        shadow-md flex flex-col justify-center items-center 
-                        h-[200px] md:h-[180px] w-[150px] md:w-[200px] text-sm md:text-lg">
-                <img src="assets/feature2.png" alt="2" class="mt-2" width="80" height="80">
-                <button class="text-center text-[10px] lg:text-lg h-full md:text-[14px] font-semibold px-4">
-                    Accountal of duty hours.
-                </button>
+            <!-- Card 2 -->
+            <div class="col-lg-3 col-md-6 col-sm-12 card-feature mb-4">
+                <div class="rounded-lg custom-gradient-yellow shadow-lg d-flex flex-column justify-content-center align-items-center p-3 text-center w-100" style="height: 180px;">
+                    <img src="assets/feature2.png" alt="Accountal" class="mb-2" width="80" height="80">
+                    <button data-key="accountal" class="btn btn-link text-dark font-weight-bold text-decoration-none">
+                        Accountal of duty hours.
+                    </button>
+                </div>
             </div>
 
-            <div class="rounded-[40px] bg-gradient-to-r from-yellow-100/80 via-white/80 to-yellow-100/80 transform hover:-translate-y-2 ease-out duration-500 
-                        shadow-md flex flex-col justify-center items-center 
-                        h-[200px] md:h-[180px] w-[150px] md:w-[200px] text-sm md:text-lg">
-                <img src="assets/feature3.png" alt="3" class="mt-2" width="80" height="80">
-                <button class="text-center text-[10px] lg:text-lg h-full md:text-[14px] font-semibold px-4">
-                    Preparation of TA/night duty allowance bills.
-                </button>
+            <!-- Card 3 -->
+            <div class="col-lg-3 col-md-6 col-sm-12 card-feature mb-4">
+                <div class="rounded-lg custom-gradient-yellow shadow-lg d-flex flex-column justify-content-center align-items-center p-3 text-center w-100" style="height: 180px;">
+                    <img src="assets/feature3.png" alt="TA Preparation" class="mb-2" width="80" height="80">
+                    <button data-key="ta" class="btn btn-link text-dark font-weight-bold text-decoration-none">
+                        Preparation of TA/night duty allowance bills.
+                    </button>
+                </div>
             </div>
 
-            <div class="rounded-[40px] bg-gradient-to-r from-yellow-100/80 via-white/80 to-blue-200/80 transform hover:-translate-y-2 ease-out duration-500 
-                        shadow-md flex flex-col justify-center items-center 
-                        h-[200px] md:h-[180px] w-[150px] md:w-[200px] text-sm md:text-lg">
-                <img src="assets/feature4.png" alt="3" class="mt-2" width="80" height="80">
-                <button class="text-center text-[10px] lg:text-lg h-full md:text-[14px] font-semibold px-4">
-                    EFT earning accountal.
-                </button>
+            <!-- Card 4 -->
+            <div class="col-lg-3 col-md-6 col-sm-12 card-feature mb-4">
+                <div class="rounded-lg custom-gradient-blue shadow-lg d-flex flex-column justify-content-center align-items-center p-3 text-center w-100" style="height: 180px;">
+                    <img src="assets/feature4.png" alt="EFT Accountal" class="mb-2" width="80" height="80">
+                    <button data-key="eft" class="btn btn-link text-dark font-weight-bold text-decoration-none">
+                        EFT earning accountal.
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- 2nd row -->
+        <!-- Arrow and Login Button -->
+        <div class="mt-4">
+            <div class="bounce text-white" style="font-size: 1.75rem;">&#x2193;</div>
+        </div>
 
-        <!-- <div class="grid grid-cols-1 md:grid-cols-3 pt-2 gap-x-[5px] gap-y-8 items-center">
-            <div class="rounded-[40px] bg-gradient-to-r from-blue-300/80 to-white/80 transform hover:-translate-y-2 ease-out duration-500 
-                        shadow-md flex flex-col justify-center items-center 
-                        h-[200px] md:h-[180px] w-[150px] md:w-[200px] text-sm md:text-lg">
-                <img src="assets/feature1.png" alt="1" class="mt-2" width="80" height="80">
-                <button class="text-center text-[10px] lg:text-lg h-full md:text-[14px] font-semibold px-4">
-                    Drawing out of TTE links.
-                </button>
-            </div>
-
-            <div class="rounded-[40px] bg-white/80 transform hover:-translate-y-2 ease-out duration-500 
-                        shadow-md flex flex-col justify-center items-center 
-                        h-[200px] md:h-[180px] w-[150px] md:w-[200px] text-sm md:text-lg">
-                <img src="assets/feature2.png" alt="2" class="mt-2" width="80" height="80">
-                <button class="text-center text-[10px] lg:text-lg h-full md:text-[14px] font-semibold px-4">
-                    Accountal of duty hours.
-                </button>
-            </div>
-
-            <div class="rounded-[40px] bg-gradient-to-r from-white/80 to-yellow-100/80 transform hover:-translate-y-2 ease-out duration-500 
-                        shadow-md flex flex-col justify-center items-center 
-                        h-[200px] md:h-[180px] w-[150px] md:w-[200px] text-sm md:text-lg">
-                <img src="assets/feature3.png" alt="3" class="mt-2" width="80" height="80">
-                <button class="text-center text-[10px] lg:text-lg h-full md:text-[14px] font-semibold px-4">
-                    Preparation of TA/night duty allowance bills.
-                </button>
-            </div>
-        </div> -->
-
-        <div class="animate-bounce drop-shadow-[0_0_3px_rgba(0,0,0,0.6)] text-[28px] mx-auto w-8 h-10 text-white mt-8">
-            &#x2193; <!-- Single down arrow -->
-        </div>        
-
-        <button class="text-white text-[17px] font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 
-            px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-transform 
-            duration-300 transform hover:scale-105" 
+    </div>
+    <button data-key="login" class="btn fw-bold text-white mt-3"
+            style="background: linear-gradient(to right, #FFC107, #FF9800); padding: 10px 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);"
             onclick="openModal('loginModal')">
             Login
         </button>
-    </div>
 </section>
 
 </body>

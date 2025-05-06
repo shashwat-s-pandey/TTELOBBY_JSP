@@ -1,0 +1,617 @@
+/* Reset and Global Layout */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Containers */
+.container-fluid {
+    min-height: 100vh;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Background Styling */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0.9;
+    overflow: hidden;
+}
+
+.background-container img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes sidebarfadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.sidebar-fadeIn {
+    opacity: 0;
+    animation: sidebarfadeIn 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    will-change: transform, opacity;
+}
+
+/* Modal Styling */
+
+#loginModal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  /* Show the modal */
+  #loginModal.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    backdrop-filter: blur(2px);
+  }
+  
+  /* Centered content box (not using modal-content) */
+  #loginModal > div {
+    background: rgba(255, 255, 255, 0.7);
+    width: 90%;
+    max-width: 400px;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+  }
+  
+  /* Slide in effect */
+  #loginModal.active > div {
+    transform: translateY(0);
+  }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Typography */
+.gradient-text {
+    background: linear-gradient(to right, #ffbf00, #ffdf2d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#typing-text {
+    white-space: nowrap;
+}
+
+#typing-text2 {
+    color: white;
+    opacity: 80%;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 90%;
+    margin: auto;
+}
+
+/* Glow Effects */
+.glow {
+    filter: brightness(5) !important;
+    transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.glow:hover {
+    animation: neonGlow 0.5s ease-in-out infinite !important;
+}
+
+@keyframes neonGlow {
+    0%, 50%, 100% { text-shadow: 0 0 15px rgba(255, 255, 255, 1); }
+}
+
+/* Navbar Adjustments */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: calc(100% - 250px);
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+    z-index: 1040;
+}
+
+/* Full width navbar on small screens */
+@media (max-width: 768px) {
+    .navbar {
+        left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar {
+        left: 0;
+    }
+}
+
+/* Footer */
+.footer-bg {
+    background-color: rgba(153, 92, 0, 0.6);
+    z-index: -1;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: 100%;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+#d_sidebar {
+    transition: all 0.3s ease;
+}
+
+#content-container,
+.navbar {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 200px;
+        /* transform: translateX(-100%); hide off-screen */
+        position: absolute;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 1050;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0); /* show sidebar on small screens */
+        z-index: 1050;
+    }
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.sidebar i {
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    color: #333; /* Default color */
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar ul li a:hover {
+    color: #007bff; /* Change text/icon color */
+}
+
+.sidebar ul li a i {
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar ul li a:hover i {
+    transform: scale(1.2); /* Slightly increase icon size */
+}
+
+.sidebar img {
+    height: 50px;
+    width: 50px;
+}
+
+.collapsed .text,
+.collapsed .dashboard-text {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#welcomeMessage {
+    max-width: 200px;
+    transition: max-width 0.7s ease-in-out, opacity 0.4s ease-in-out;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap:normal;
+    display: inline-block;
+}
+
+.sidebar.collapsed #welcomeMessage {
+    max-width: 80px;
+}
+
+.toggle-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+}
+
+/* Card Grid */
+#sortable-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    min-height: 400px;
+}
+
+/* Default state (sidebar expanded) */
+#content-container {
+    margin-left: 250px;
+    padding-top: 60px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Collapsed sidebar (class added dynamically by JS) */
+.sidebar.collapsed ~ #content-container {
+    margin-left: 250px;
+}
+
+/* On small screens, full-width content */
+@media (max-width: 768px) {
+    #content-container {
+        margin-left: 0 !important;
+    }
+}
+
+/* Medium screens (<= 992px): keep layout similar */
+@media (max-width: 992px) {
+    #content-container {
+        margin-left: 200px;
+    }
+
+    .sidebar.collapsed ~ #content-container {
+        margin-left: 200px;
+    }
+}
+
+/* Small screens (<= 768px): full width layout */
+@media (max-width: 768px) {
+    #content-container {
+        margin-left: 0 !important;
+    }
+
+    .sidebar.collapsed ~ #content-container {
+        margin-left: 100px !important;
+    }
+}
+
+.draggable-card {
+    width: 100%;
+    min-height: 200px; /* Adjust as needed */
+    cursor: default;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card-body canvas {
+    width: 100% !important;
+    height: 250px !important;
+}
+
+.draggable-card:active {
+    cursor: default;
+}
+
+.ui-sortable-placeholder {
+    visibility: visible !important;
+    background: rgba(0, 123, 255, 0.1);
+    border: 2px dashed #007bff;
+}
+
+.card-header, .ui-sortable-helper {
+    cursor: move !important;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ensures cards are evenly spaced */
+}
+
+#card {
+    transition: transform 0.3s ease-in-out;
+}
+
+#card:hover {
+    transform: scale(1.05);
+}
+
+.card-body {
+    flex: 1;
+}
+
+.bounce {
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Sidebar Quick Nav */
+.animated {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.shift-right {
+    transform: translateX(220px);
+    transition: transform 0.3s ease-in-out;
+}
+
+#sidebar {
+    width: 220px;
+    background-color: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+}
+
+#sidebar.active {
+    visibility: visible;
+    opacity: 0.95;
+}
+
+/* Smooth opening */
+.fade-in {
+    animation: sidebarFadeIn 0.2s forwards ease-in-out;
+}
+
+/* Smooth closing */
+.fade-out {
+    animation: sidebarFadeOut 0.2s forwards ease-in-out;
+}
+
+@keyframes sidebarFadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.95; }
+}
+
+@keyframes sidebarFadeOut {
+    from { opacity: 0.95; }
+    to { opacity: 0; }
+}
+
+#btnicon {
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    animation: bounceTwice 5s infinite ease-in-out;
+}
+
+@keyframes bounceTwice {
+    0%, 100% {
+        transform: translateY(0);
+      }
+      4% {
+        transform: translateY(-15px);
+      }
+      8% {
+        transform: translateY(0);
+      }
+      12% {
+        transform: translateY(-15px);
+      }
+      16% {
+        transform: translateY(0);
+      }
+}
+
+#btnicon:hover {
+    transform: scale(1.2);
+}
+
+#btnicon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#infoicon {
+    z-index: 1100;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    transition: transform 0.3s ease-in-out !important;
+    will-change: transform;
+}
+
+#infoicon.shift-right {
+    transform: translateX(120px) !important;
+}
+
+.sidenav-transition {
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Nav Hover Gradients */
+.nav {
+    display: block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 3.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+nav a {
+    transition: color 0.2s ease-in-out, background 0.3s ease-in-out;
+    font-size: medium;
+}
+
+.nav:hover {
+    transform: scale(1.05);
+}
+
+.hrms { color: #000; }
+.ress { color: #000; }
+.hht { color: #000; }
+.reis {color: #000; }
+.rbs { color: #000; }
+.icms { color: #000; }
+.tms { color: #000; }
+.nget { color: #000; }
+.wecrs { color: #000; }
+.fois { color: #000; }
+.ndma { color: #000; }
+
+.hrms:hover { background: linear-gradient(to right, #1D4ED8, transparent); color: white; }
+.ress:hover { background: linear-gradient(to right, #0D9488, transparent); color: white; }
+.hht:hover  { background: linear-gradient(to right, #F87171, transparent); color: white; }
+.reis:hover { background: linear-gradient(to right, #3B82F6, transparent); color: white; }
+.rbs:hover  { background: linear-gradient(to right, #F97316, transparent); color: white; }
+.icms:hover  { background: linear-gradient(to right, #EC4899, transparent); color: white; } /* pink */
+.tms:hover   { background: linear-gradient(to right, #A855F7, transparent); color: white; } /* purple */
+.nget:hover  { background: linear-gradient(to right, #6366F1, transparent); color: white; } /* indigo */
+.wecrs:hover { background: linear-gradient(to right, #10B981, transparent); color: white; } /* emerald */
+.fois:hover  { background: linear-gradient(to right, #14B8A6, transparent); color: white; } /* teal */
+.ndma:hover  { background: linear-gradient(to right, #3B82F6, transparent); color: white; } /* blue */
+
+/* Responsive Design */
+@media screen and (max-width: 1063px) {
+    .span1 { font-size: 44px !important; }
+    .span2 { font-size: 32px; }
+}
+
+@media screen and (max-width: 958px) {
+    ul { font-size: smaller; }
+    ul img { width: 15px; height: 15px; }
+    #irlogo { width: 80px; height: 55px; }
+    #crislogo img { width: 100px; height: 50px; }
+}
+
+@media screen and (max-width: 832px) {
+    ul { font-size: 12px; }
+    #typing-text { font-size: 30px; }
+}
+
+@media screen and (max-width: 790px) {
+    ul { font-size: 12px; }
+    #irlogo { width: 80px; height: 60px; }
+    #crislogo img { width: 100px; height: 50px; }
+    .navbar-collapse { display: block; }
+    .navbar-nav { display: none; }
+    .navbar-toggler { display: block; }
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+}
+
+.collapse.show {
+    height: auto;
+    transition: height 0.3s ease-in-out;
+}
+
+/* Gradient Background Utilities */
+.custom-gradient-blue {
+    background: linear-gradient(to right, rgba(173, 216, 230, 0.8), rgba(255, 255, 255, 0.8), rgba(255, 255, 153, 0.8));
+}
+
+.custom-gradient-yellow {
+    background: linear-gradient(to right, rgba(255, 255, 153, 0.8), rgba(255, 255, 255, 0.8), rgba(255, 255, 153, 0.8));
+}

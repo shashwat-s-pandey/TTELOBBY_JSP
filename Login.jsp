@@ -3,119 +3,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Login Modal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+
+    <!-- Bootstrap 4.5.2 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-        generateCaptcha(); // Generate CAPTCHA immediately when the page loads
-    });
-        
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const infoIcon = document.getElementById("infoicon");
-            if (!modal) return;
-
-            // Prevent scrolling
-            document.body.style.overflow = "hidden";
-
-            // Hide the info icon
-            infoIcon.style.display = "none";  // 👈 Hides the icon when modal opens
-
-            // Show modal
-            modal.classList.remove("pointer-events-none", "opacity-0", "scale-95");
-            modal.classList.add("opacity-100", "scale-100");
-        }
-
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            const infoIcon = document.getElementById("infoicon");
-            if (!modal) return;
-
-            // Allow scrolling again
-            document.body.style.overflow = "auto";
-
-            // Hide modal
-            modal.classList.remove("opacity-100", "scale-100");
-            modal.classList.add("opacity-0", "scale-95");
-
-            // Show the info icon again
-            infoIcon.style.display = "flex";  // 👈 Makes the icon visible again
-
-            // Disable interactions after animation
-            setTimeout(() => {
-                modal.classList.add("pointer-events-none");
-            }, 300);
             generateCaptcha();
-        }
-
-
-        // Close modal when clicking outside the modal content
-        window.addEventListener("click", function (event) {
-            const modal = document.getElementById("loginModal");
-            if (modal && event.target === modal) {
-                generateCaptcha();
-                closeModal("loginModal");
-            }
         });
 
-        // Generate a random alphanumeric CAPTCHA
         function generateCaptcha() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            const chars = "ABCDEFGHJKMNPQRTUVWXYZ2346789"; // No O, 0, i, I, l, L, 1, 5, S, small letters; all caps
             let captcha = "";
             for (let i = 0; i < 6; i++) {
                 captcha += chars.charAt(Math.floor(Math.random() * chars.length));
             }
 
-            let canvas = document.getElementById("captchaCanvas");
-            let ctx = canvas.getContext("2d");
+            const canvas = document.getElementById("captchaCanvas");
+            canvas.width = 180;  // Increased width
+            canvas.height = 60;
+            const ctx = canvas.getContext("2d");
 
-            // Clear previous CAPTCHA
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Set random background color
-            ctx.fillStyle = "#f8f9fa"; 
+            ctx.fillStyle = "#f8f9fa";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Apply text styles
             ctx.font = "30px Arial";
-            ctx.fillStyle = getRandomColor();
+            ctx.fillStyle = "#6c757d"; // Gray fill
+            ctx.strokeStyle = "#000000"; // Black outline
+            ctx.lineWidth = 1;
             ctx.textBaseline = "middle";
 
-            // Add slight text distortion
-            let x = 10;
+            let x = 15;
             for (let i = 0; i < captcha.length; i++) {
                 ctx.save();
                 ctx.translate(x, 30);
-                ctx.rotate(Math.random() * 0.2 - 0.1); // Random tilt
+                ctx.rotate(Math.random() * 0.2 - 0.1);
                 ctx.fillText(captcha[i], 0, 0);
+                ctx.strokeText(captcha[i], 0, 0); // Add outline
                 ctx.restore();
-                x += 20;
+                x += 25; // More spacing
             }
 
-            // Save CAPTCHA text
             document.getElementById("captchaText").value = captcha;
-            document.getElementById("captchaInput").value = ""; // Clear input field
-        }
-
-        // Function to generate a random color
-        function getRandomColor() {
-            let letters = "0123456789ABCDEF";
-            let color = "#";
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
+            document.getElementById("captchaInput").value = "";
         }
 
         function handleLogin(event) {
             event.preventDefault();
 
-            let uid = document.getElementById("uid").value;
-            let password = document.getElementById("password").value;
-            let captchaInput = document.getElementById("captchaInput").value;
-            let generatedCaptcha = document.getElementById("captchaText").value;
+            const uid = document.getElementById("uid").value;
+            const password = document.getElementById("password").value;
+            const captchaInput = document.getElementById("captchaInput").value;
+            const generatedCaptcha = document.getElementById("captchaText").value;
 
-            // Hardcoded credentials
             const staticUID = "admin";
             const staticPassword = "password123";
 
@@ -131,75 +75,83 @@
                 window.location.href = "dashboard.jsp";
             } else {
                 document.getElementById("errorMessage").innerText = "Invalid credentials!";
-                generateCaptcha(); // Refresh CAPTCHA on failure
+                generateCaptcha();
             }
         }
-
     </script>
 </head>
 
-<body">
+<body>
 
-<!-- Login Modal -->
-<div id="loginModal" 
-    class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm hidden flex justify-center items-center z-[1100] transition-opacity duration-300 ease-out">
-    
-    <div class="modal-content bg-white/70 p-6 rounded-lg shadow-2xl w-96 relative transform scale-95 transition-all duration-300 ease-out">
-        <h2 class="text-2xl text-center text-blue-500 font-extrabold mb-4 tracking-wide drop-shadow-lg">
-            Login
-        </h2>        
-
-        <form onsubmit="handleLogin(event)">
-            <input 
-                type="text" 
-                id="uid" 
-                placeholder="User ID" 
-                class="w-full border border-gray-300 p-2 rounded mb-2 focus:ring-2 focus:ring-yellow-400 outline-none"
-                required
-            />
-            <input 
-                type="password" 
-                id="password" 
-                placeholder="Password" 
-                class="w-full border border-gray-300 p-2 rounded mb-4 focus:ring-2 focus:ring-yellow-400 outline-none"
-                required
-            />
-
-            <!-- CAPTCHA -->
-            <div class="flex items-center mb-4">
-                <canvas id="captchaCanvas" width="150" height="50" class="rounded bg-gray-200"></canvas>
-                <input type="hidden" id="captchaText">
-                <button type="button" onclick="generateCaptcha()" class="text-blue-500 hover:underline ml-2 mt-1">
-                    Refresh
-                </button>
-            </div>
-            <input 
-                type="text" 
-                id="captchaInput" 
-                placeholder="Enter CAPTCHA" 
-                class="w-full border border-gray-300 p-2 rounded mb-4 focus:ring-2 focus:ring-yellow-400 outline-none"
-                required
-            />
-
-            <p id="errorMessage" class="text-red-500 text-sm text-center mb-2"></p>
-            <p id="loadingMessage" class="text-blue-500 text-sm text-center mb-2"></p>
-
-            <button 
-                type="submit"
-                class="w-full p-2 mb-2 bg-blue-500 text-white drop-shadow-lg ease-out transform hover:scale-105 transition duration-200 rounded"
-            >
+    <!-- Login Modal -->
+    <div id="loginModal">
+        <div>
+            <h2 class="text-center text-primary font-weight-bold mb-4 text-uppercase" style="letter-spacing: 0.05em;">
                 Login
-            </button>
+            </h2>
 
-            <div class="flex justify-end">
-                <a class="mb-4 mt-2 text-violet-500 hover:font-semibold duration-300 inline-flex" href="#">Forgot Password?</a>
-            </div>
-        </form>        
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="uid" placeholder="User ID" class="form-control mb-2" required />
+                <input type="password" id="password" placeholder="Password" class="form-control mb-4" required />
 
-        <button class="w-full drop-shadow-lg ease-out transform hover:scale-105 transition duration-200 bg-teal-500 text-white p-2 rounded" onclick="closeModal('loginModal')">Close</button>
+                <!-- CAPTCHA -->
+                <div class="d-flex align-items-center mb-4">
+                    <canvas id="captchaCanvas" width="180" height="50" class="rounded bg-secondary"></canvas>
+                    <input type="hidden" id="captchaText">
+                    <a href="#" onclick="generateCaptcha()" class="text-primary ml-2 mt-1">Refresh</a>
+                </div>
+
+                <input type="text" id="captchaInput" placeholder="Enter CAPTCHA" class="form-control mb-4" required />
+
+                <p id="errorMessage" class="text-danger small text-center mb-2"></p>
+                <p id="loadingMessage" class="text-primary small text-center mb-2"></p>
+
+                <button type="submit" class="btn btn-primary btn-block mb-2">Login</button>
+
+                <div class="text-right">
+                    <a href="#" class="text-primary">Forgot Password?</a>
+                </div>
+            </form>
+
+            <button class="btn btn-info btn-block mt-3" onclick="closeModal('loginModal')">Close</button>
+        </div>
     </div>
-</div>
 
 </body>
-<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+
+        // Show modal with transition
+        modal.style.display = "block";
+        setTimeout(() => {
+            modal.classList.add("active");
+        }, 10); // allow paint before adding class
+
+        // Close on outside click
+        function outsideClickHandler(e) {
+            if (!modal.querySelector('div').contains(e.target)) {
+                closeModal(modalId);
+                modal.removeEventListener('click', outsideClickHandler);
+            }
+        }
+
+        modal.addEventListener('click', outsideClickHandler);
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+
+        modal.classList.remove("active");
+
+        // Delay hiding to match CSS transition
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 300);
+
+        generateCaptcha(); // refresh CAPTCHA on close
+    }
+</script>
 </html>

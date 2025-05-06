@@ -5,89 +5,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traveling Ticket Examiner Lobby</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap 4.5.2 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&display=swap" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="homepage.css">
+
+    <!-- jQuery (required for Bootstrap 4.5) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Popper.js (required for Bootstrap 4.5) -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Bootstrap 4.5.2 JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
         function checkLoginStatus() {
-            let username = localStorage.getItem("uid"); // Get username from storage
-            
+            let username = localStorage.getItem("uid");
             if (!username) {
-                // Redirect to index.jsp if no user is logged in
                 window.location.href = "index.jsp";
             } else {
-                // Show welcome message
                 document.getElementById("welcomeMessage").innerText = "Welcome, " + username;
             }
         }
 
         function logout() {
-            localStorage.removeItem("uid"); // Clear user session
-            window.location.href = "index.jsp"; // Redirect to home
+            localStorage.removeItem("uid");
+            window.location.href = "index.jsp";
+        }
+
+        function toggleSidebar() {
+            document.querySelector(".sidebar").classList.toggle("active");
         }
     </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,100..900&display=swap" rel="stylesheet"/>
 </head>
 
 <body onload="checkLoginStatus()">
-    <div class="flex flex-col min-h-screen">
-
-        <!-- Background Image -->
-        <div class="railway absolute w-full h-[calc(100vh+560px)] md:h-[calc(100vh)] lg:h-[calc(100vh)]" style="opacity: 0.9; position: absolute; z-index: -1;">
-            <img src="assets/irly.jpg" alt="Background" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-
-        <div class="border-b-[0.1px] border-gray-300 animate-fadeIn">
-            <div class="h-[90px] sm:h-[80px] flex justify-between items-center text-center opacity-80">
-                
-                <!-- Left Section -->
-                <div class="flex">
-                    <img class="pl-5" src="assets/irlogo.svg" alt="IR Logo" width="90" height="90">
-                    <h1 class="text-white text-[30px] font-semibold py-4 items-center px-5 hover:text-white hover:text-bold">Dashboard</h1>
-                </div>
-
-                <!-- Right Section: CRIS Logo + Welcome Message -->
-                <div class="flex items-center pr-8 space-x-4">
-                    <span id="welcomeMessage" class="text-white font-semibold text-lg px-2"></span>
-                    <button onclick="logout()" class="text-white font-semibold py-4 rounded-lg transition transform hover:scale-110 flex items-center px-5 hover:text-white hover:text-bold glow">
-                        <img src="assets/exit.png" alt="Sign On" width="20" height="20">
-                        <span class="pl-2">Log Out</span>
-                    </button>
-                    <a href="https://www.cris.org.in">
-                        <img src="assets/cris_logo.png" alt="CRIS Logo" width="150" height="100">
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <iframe src="https://osivamh5v2wvbf2.in.qlikcloud.com/single/?appid=a972b12d-666a-46ec-8a49-7dd39c6afb01&sheet=dGSNjcJ&opt=nointeraction" width="100%" height="600"></iframe>
-        
-        <!-- <div class="flex justify-center items-center">
-            <img src="assets/railwaydashboard.png" alt="" height="1000" width="1000">
-        </div> -->
-
-        <!-- Include Footer -->
-        <jsp:include page="Footer.jsp" />
-
+    <div class="background-container">
+        <img src="assets/irly.jpg" alt="Background">
     </div>
 
-    <style>
-        @keyframes neonGlow {
-        0% { text-shadow: 0 0 15px rgba(255, 255, 255, 1); }
-        50% { text-shadow: 0 0 15px rgba(255, 255, 255, 1); }
-        100% { text-shadow: 0 0 15px rgba(255, 255, 255, 1); }
-    }
+    <div class="d-flex flex-column">
+        <div class="d-flex">
+            <!-- Sidebar -->
+            <jsp:include page="d_sidebar.jsp" />
 
-    .glow {
-        filter: brightness(5); /* Makes the text even brighter */
-        transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
-    }
+            <div class="w-100">
+                <!-- Navbar -->
+                <nav class="navbar shadow-sm top-0" style="height: 60px; z-index: 1000;">
+                    <div class="d-flex justify-content-between align-items-center h-100 px-3 w-100">
+                        <!-- Left: Hamburger Button -->
+                        <button id="sidebarToggleBtn" class="btn btn-light" onclick="toggleSidebar()">
+                            <i class="fa fa-bars"></i>
+                        </button>
 
-    .glow:hover {
-        animation: neonGlow 0.5s ease-in-out infinite;
-    }
-    </style>
+                        <!-- Right: Other Navbar Items -->
+                        <div class="d-flex align-items-center">
+                            <!-- Optional Welcome Message -->
+                            <!-- <span id="welcomeMessage" class="fw-semibold me-3"></span> -->
+                            <a href="https://www.cris.org.in">
+                                <img src="assets/cris_logo2.png" alt="CRIS Logo" width="120" height="50">
+                            </a>
+                        </div>
+                    </div>
+                </nav>
 
+                <!-- Cards Section -->
+                <div id="content-container">
+                    <!-- <jsp:include page="d_card.jsp" /> -->
+                </div>
+
+                <iframe class="qlik ml-auto d-block"
+                        src="https://osivamh5v2wvbf2.in.qlikcloud.com/single/?appid=470b16cd-1aff-4d3d-979e-5d27f63c7356&sheet=nkjjJj&theme=horizon&opt=ctxmenu,currsel"
+                        style="border: none; padding-right: 10px; width: 80%; height: 600px;">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <jsp:include page="Footer.jsp" />
 </body>
-
 </html>
